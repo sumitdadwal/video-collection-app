@@ -1,0 +1,17 @@
+{% extends 'vids/base.html' %}
+{% block content %}
+{% load widget_tweaks %}
+<div class="container">
+    <h2>Create Collection</h2>
+    <form method="post">
+        {% csrf_token %}
+{% for field in form %}
+        <div class="form-group {% if field.errors %}alert alert-danger{% endif %}">
+            {{ field.errors }}
+            {{ field.label_tag}}
+            {% render_field field class="form-control" %}
+        </div>
+        {% endfor %}        <input type="submit" value="Create Collection" class="btn btn-primary">
+    </form>
+</div>
+{% endblock %}

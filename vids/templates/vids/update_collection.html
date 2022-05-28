@@ -1,0 +1,20 @@
+{% extends 'vids/base.html' %}
+{% block content %}
+<div class="container">
+    <h2>Edit Collection</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% load widget_tweaks %}
+
+        {% for field in form %}
+        <div class="form-group {% if field.errors %}alert alert-danger{% endif %}">
+            {{ field.errors }}
+            {{ field.label_tag}}
+            {% render_field field class="form-control" %}
+        </div>
+        {% endfor %}
+        <input type="submit" value="Save Collection" class="btn btn-primary">
+    </form>
+    <a href="{% url 'delete_collection' collection.id %}" class="btn btn-danger">Delete Collection</a>
+</div>
+{% endblock %}

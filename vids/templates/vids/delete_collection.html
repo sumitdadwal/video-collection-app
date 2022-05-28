@@ -1,0 +1,16 @@
+{% extends 'vids/base.html' %}
+{% block content %}
+<div class="container">
+    <h2>Delete Collection - {{collection.title}}</h2>
+    <h4>Are you sure?</h4>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-danger">Delete Collection</button>
+        <a class="ml-2" href="{% url 'dashboard'%}">Don't Delete</a>
+    </form>
+<br>
+
+<h2><a href="{% url 'detail_collection' collection.id %}">{{collection.title}}</a></h2>
+</div>
+{% endblock %}

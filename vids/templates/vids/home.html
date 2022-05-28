@@ -1,0 +1,49 @@
+{% extends 'vids/base.html' %}
+{% block content %}
+<section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">Collect your Favourite Videos!</h1>
+        <p class="lead text-muted"> Show off your awesome taste when it comes to the YouTube videos and let people know what they are missing on! Click the button below to get started</p>
+        <p>
+            <a href="{% url 'create_collection' %}" class="btn btn-primary">Create Collection</a>
+        </p>
+    </div>
+</section>
+<div class="container">
+    <h1 class="text-center">
+        Popular Videos
+    </h1>
+    {% for collection in popular_collections %}
+
+    <h2><a href="{% url 'detail_collection' collection.id %}"> {{ collection.title }}</a></h2>
+        <div class="row">
+            {% for video in collection.video_set.all %}
+            <div class="col-md-4 mt-3">
+                <iframe width="100%" height="210" src="https://www.youtube.com/embed/{{ video.youtube_id }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="card-body">
+                    <p class="card-text">{{ video.title }}</p>
+                </div>
+            </div>
+
+        {% endfor %}
+        </div>
+        {% endfor %}
+
+    <h1 class="text-center"> Recent Videos</h1>
+    {% for collection in recent_collections %}
+
+    <h2><a href="{% url 'detail_collection' collection.id %}"> {{ collection.title }}</a></h2>
+        <div class="row">
+            {% for video in collection.video_set.all %}
+            <div class="col-md-4 mt-3">
+                <iframe width="100%" height="210" src="https://www.youtube.com/embed/{{ video.youtube_id }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="card-body">
+                    <p class="card-text">{{ video.title }}</p>
+                </div>
+            </div>
+
+        {% endfor %}
+        </div>
+        {% endfor %}
+</div>
+{% endblock %}
